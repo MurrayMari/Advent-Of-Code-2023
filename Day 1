@@ -1,3 +1,8 @@
+# get the first and last number in an string
+# if only one int then make it double digit eg 7 =77
+# then add them all together
+# https://adventofcode.com/2023/day/1
+
 # part 1
 
 co_ords = []

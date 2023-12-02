@@ -14,3 +14,33 @@ with open("inputs.txt") as file:
       co_ords.append(int(whole_nums))
 
 print(sum(co_ords))
+
+
+# part 2 - made a copy of the input file as 'input2' to not write over the orginal
+# so inputs are same as before
+
+with open("input2.txt", "r") as file:
+    data = file.read()
+    data = data.replace('zero', 'zero0zero')
+    data = data.replace('one', 'one1one')
+    data = data.replace('two', 'two2two')
+    data = data.replace('three', 'three3three')
+    data = data.replace('four', 'four4four')
+    data = data.replace('five', 'five5five')
+    data = data.replace('six', 'six6six')
+    data = data.replace('seven', 'seven7seven')
+    data = data.replace('eight', 'eight8eight')
+    data = data.replace('nine', 'nine9nine')
+
+with open(r'input2.txt', 'w') as file:
+    file.write(data)
+
+better_co_ords = []
+
+with open("input2.txt") as file:
+    for line in file:
+      str_nums = ''.join(x for x in line if x.isdigit())
+      whole_nums = str_nums[0] + str_nums[-1]
+      better_co_ords.append(int(whole_nums))
+
+print(sum(better_co_ords))

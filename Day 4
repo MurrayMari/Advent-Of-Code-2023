@@ -1,0 +1,78 @@
+#https://adventofcode.com/2023/day/4
+
+# it looks like each card has two lists of numbers separated by a vertical bar (|): a list of winning numbers and then a list of numbers you have. You organize the information into a table (your puzzle input).
+#  The first match makes the card one point and each match after the first doubles the point value of that card
+
+# Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
+# Card 2: 13 32 20 16 61 | 61 30 68 82 17 32 24 19
+# Card 3:  1 21 53 59 44 | 69 82 63 72 16 21 14  1
+# Card 4: 41 92 73 84 69 | 59 84 76 51 58  5 54 83
+# Card 5: 87 83 26 28 32 | 88 30 70 12 93 22 82 36
+# Card 6: 31 18 13 56 72 | 74 77 10 23 35 67 36 11
+
+# if 1 number matches list 1 then 1 point, 2 = 2, 3 = 4
+# 4 = 8, 5 = 16, 6 = 32, 7 = 64, 8 = 128, 9 = 256, 10 = 512
+# 10 winninig numbers
+
+"""
+PART 1
+"""
+
+points = {
+  0:0,
+  1:1,
+  2:2,
+  3:4,
+  4:8,
+  5:16,
+  6:32,
+  7:64,
+  8:128,
+  9:256,
+  10:512
+}
+#remove up till : then spilt into lists on  |, compare
+
+def all_numbers(lines):
+  r = lines.index(':')
+  newline = lines[r+1:]
+  lists_cards = newline.split('|')
+
+  winning_nums_strs =lists_cards[0]
+  winning_nums_s = winning_nums_strs.strip()
+  winning_nums_list = winning_nums_s.split(' ')
+  winning_nums = []
+  for x in winning_nums_list:
+     if x.isdigit():
+      winning_nums.append(int(x))
+
+  f = lines.index(':')
+  newline = lines[f+1:]
+  lists_cards = newline.split('|')
+  
+  card_nums_strs =lists_cards[1]
+  card_nums_s = card_nums_strs.strip()
+  card_nums_list = card_nums_s.split(' ')
+  card_nums = []
+  for x in card_nums_list:
+    if x.isdigit():
+      card_nums.append(int(x))
+  
+  res = list(set(winning_nums).intersection(set(card_nums)))
+  return len(res)
+  
+
+with open("inputs_day_4.txt") as file:
+  wins_n = []
+  for line in file:
+    # print(all_numbers(line))
+    q = all_numbers(line)
+    print(points[q])
+    wins_n.append(points[q])
+    # print(wins_n)
+    print(sum(wins_n))
+    
+    
+  
+
+  
